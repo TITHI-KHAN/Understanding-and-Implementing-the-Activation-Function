@@ -12,9 +12,7 @@
 
 **Tasks:**
 
-**1.**	**Theoretical Understanding:**
-
-o	**Explain the Activation Function, including its equation and graph.**
+**Theoretical Understanding: Explain the Activation Function, including its equation and graph.**
 
 Ans: Activation functions play a crucial role in artificial neural networks by introducing non-linearity, which enables the network to learn complex mappings between input and output spaces. An activation function is a crucial component of a neural network, responsible for introducing non-linearity into the model. It operates on the weighted sum of inputs and biases of a neuron, determining whether it should be activated or not. The output of the activation function decides the input for the next layer in the neural network.
 
@@ -82,13 +80,29 @@ which is again a linear function.
 
 This observation results again in a linear function even after applying a hidden layer, hence we can conclude that, doesn’t matter how many hidden layer we attach in neural net, all layers will behave same way because the composition of two linear function is a linear function itself. Neuron can not learn with just a linear function attached to it. A non-linear activation function will let it learn as per the difference w.r.t error. Hence we need an activation function. 
 
+**Theoretical Understanding: Discuss why activation functions are used in neural networks, focusing on the role of the Activation function.**
+
+**Answer:** Activation functions are a fundamental component of neural networks, playing a crucial role in their ability to model complex relationships within data. The primary reasons for using activation functions include:
+
+1. **Introducing Non-linearity**: Activation functions introduce non-linearity into the network, enabling it to learn and represent non-linear relationships between input features and output labels. Without activation functions, neural networks would merely be a composition of linear transformations, severely limiting their expressive power. By applying non-linear activation functions like sigmoid, ReLU, or tanh, neural networks can approximate and learn complex mappings from inputs to outputs.
+
+2. **Enabling Complex Representations**: The non-linear properties introduced by activation functions allow neural networks to represent highly complex and intricate relationships within data. This enables them to solve tasks that involve complex decision boundaries or patterns, such as image recognition, natural language processing, and speech recognition.
+
+3. **Facilitating Feature Learning**: Activation functions facilitate feature learning by enabling neurons to learn and activate specific features within the data. Different activation functions emphasize different features and help the network extract relevant information from the input data. For instance, ReLU activation tends to activate features that have a positive influence on the prediction, while sigmoid activation squashes the output to a range between 0 and 1, useful for tasks like binary classification where probabilities are desired.
+
+4. **Controlling Neuron Activation**: Activation functions also control the activation level of neurons within the network. They determine whether a neuron should be activated (fire) or remain inactive based on the input it receives. This allows the network to regulate the flow of information and selectively focus on relevant features during the learning process.
+
+5. **Gradient Propagation**: Activation functions play a crucial role in gradient propagation during the backpropagation algorithm, which is used to update the weights of the network during training. The derivative of the activation function affects how gradients are backpropagated through the network layers, influencing the learning dynamics and convergence speed of the training process.
+
+Overall, activation functions are essential components of neural networks, enabling them to learn complex patterns and representations from data by introducing non-linearity, facilitating feature learning, controlling neuron activation, and influencing gradient propagation during training.
+
 
 **Variants of Activation Function**: (**Mathematical Exploration: Derive the Activation function formula and demonstrate its output range.**)
 
 
 Several types of activation functions have been proposed and utilized in neural network architectures, each with its characteristics, advantages, and disadvantages. Below are some widely studied activation functions:
 
-1. Sigmoid Function (Logistic Function)
+**1. Sigmoid Function (Logistic Function)
 2. Hyperbolic Tangent Function (tanh)
 3. Rectified Linear Unit (ReLU)
 4. Leaky ReLU
@@ -98,8 +112,7 @@ Several types of activation functions have been proposed and utilized in neural 
 8. Swish Function
 9. Linear Function
 10. Parametric ReLU Function
-11. Gaussian Error Linear Unit (GELU) Function
-
+11. Gaussian Error Linear Unit (GELU) Function**
 
 
 **1. Sigmoid Function (Logistic Function)**:
@@ -383,13 +396,94 @@ GELU nonlinearity is better than ReLU and ELU activations and finds performance 
 
 **If your output is for multi-class classification then, Softmax is very useful to predict the probabilities of each classes.**
 
+**Mathematical Exploration: Calculate the derivative of the Activation function and explain its significance in the backpropapation process.**
 
-o	Discuss why activation functions are used in neural networks, focusing on the role of the Activation function.
+**Answer:**
 
-**2.**	**Mathematical Exploration:**
+Let's calculate the derivatives of the mentioned activation functions one by one and discuss their significance in the backpropagation process:
+
+1. **Sigmoid Function (Logistic Function)**:
+
+   - Equation: ![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/fe955ea7-d336-4ab4-aec1-d53b182822e1)
+
+   - Derivative: ![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/88f73067-c7fd-454c-9af9-debcaf4c4aa3)
+
+   - Significance: In the backpropagation process, the derivative of the sigmoid function helps in calculating the gradient of the loss function with respect to the weights of the neural network. It is crucial for adjusting the weights during training, as it indicates how much the output of a neuron should be adjusted to minimize the error.
+
+2. **Hyperbolic Tangent Function (tanh)**:
+
+   - Equation: ![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/4c40edda-0065-423b-81b7-61a8e1530863)
+
+   - Derivative: ![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/b79c2795-5cd6-44bd-8ed2-c536bd88c5b8)
+
+    - Significance: Similar to the sigmoid function, the derivative of the tanh function is used in backpropagation to compute gradients. It helps in updating the weights of the network to minimize the error. Tanh is often preferred over sigmoid due to its zero-centered output range, which can make optimization easier.
+
+3. **Rectified Linear Unit (ReLU)**:
+
+    - Equation: ![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/a9215745-bd78-44d1-a989-c0c79eddd53e)
+
+   - Derivative: ![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/c992827b-36b6-4c76-8708-54bc327239da)
+
+    
+   - Significance: The derivative of ReLU is straightforward, either 0 for negative inputs or 1 for positive inputs. In the backpropagation process, it helps in addressing the vanishing gradient problem by allowing gradients to flow for positive inputs. However, it can suffer from the dying ReLU problem where neurons may become inactive and stop learning.
+
+4. **Leaky ReLU**:
+   - Equation: ![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/16be1316-b4ab-40de-ab32-2eee0665dad0)
+where ![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/66aca9b5-438c-4902-ac21-a30bb3ba89f9) is a small constant (typically 0.01).
+
+   - Derivative: ![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/3eeb5896-b711-4347-8bcd-646da38e4c66)
+
+   - Significance: Leaky ReLU addresses the dying ReLU problem by allowing a small gradient for negative inputs, which prevents neurons from becoming completely inactive. Its derivative helps in backpropagation, allowing gradients to flow for both positive and negative inputs.
+
+5. **Exponential Linear Unit (ELU)**:
+   - Equation: ![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/299f9a12-053e-49e9-ba44-88900ef2ceb6)
+ where ![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/d1efd55a-3438-425c-8d27-654ceb46352a) is a small positive constant (typically 1).
+
+   - Derivative: ![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/fb9a66d0-de34-4ebd-9e95-f4491c662c16)
 
 
-o Calculate the derivative of the Activation function and explain its significance in the backpropapation process.
+   - Significance: ELU is another alternative to ReLU, which addresses the dying ReLU problem by allowing negative inputs to have non-zero gradients. Its derivative helps in backpropagation, allowing gradients to flow smoothly for both positive and negative inputs.
+
+6. **Scaled Exponential Linear Unit (SELU)**:
+   - Equation: SELU is a scaled version of the ELU function with specific parameters.
+   - Derivative: The derivative of SELU depends on its parameters and can be complex.
+   - Significance: SELU is designed to ensure self-normalization of the hidden layers, which can lead to more stable training dynamics and improved convergence properties. Its derivative is essential in the backpropagation process for updating the weights.
+
+7. **Softmax Function**:
+   - Equation: ![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/aee3e51a-0d76-42fd-9823-4db02c87305a) for i = 1, 2, ..., n
+
+    - Derivative: The derivative of the softmax function is complex and typically not used explicitly in backpropagation. Instead, the cross-entropy loss function is often used in conjunction with softmax, and its derivative is computed during backpropagation.
+ 
+   - Significance: Softmax is commonly used in the output layer of neural networks for multi-class classification tasks, as it converts the raw scores into probability distributions. While its derivative is not directly used in backpropagation, the softmax function itself is crucial for obtaining meaningful class probabilities.
+
+8. **Swish Function**:
+   - Equation: ![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/00f5ceaf-38e0-467a-9728-eac17ca6ff38)
+
+   - Derivative: The derivative of the Swish function is not as straightforward as some other functions and involves the derivative of the sigmoid function.
+  
+   - Significance: Swish is a recently proposed activation function that combines features of ReLU and sigmoid functions. It has shown promising performance in some scenarios, and its derivative is essential for updating weights during backpropagation.
+
+9. **Linear Function**:
+   - Equation: ![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/591666b7-b416-483a-b77a-41965551bb6f)
+
+   - Derivative: ![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/10b7768e-eb1a-4b0c-8aac-e203fe1ae0b4)
+
+   - Significance: The linear function is simple and does not introduce non-linearity. It is typically used in the output layer for regression tasks, where the network needs to directly predict continuous values. Its derivative of 1 simplifies the backpropagation process, allowing gradients to flow unchanged.
+
+10. **Parametric ReLU Function**:
+    - Equation: ![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/80ababc1-3543-4d86-9912-1b2a1ddc3a63)
+ where ![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/6b98b982-dff4-41ad-ba09-9f43bad99a48) is a learnable parameter.
+  
+    - Derivative: ![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/bd07e1c5-d683-42f2-948c-1da793403a68)
+
+    - Significance: Parametric ReLU extends ReLU by introducing a learnable parameter \( \alpha \), which allows the network to learn the optimal slope for negative inputs. Its derivative helps in backpropagation, enabling adaptive adjustments to the slope based on the input data.
+
+11. **Gaussian Error Linear Unit (GELU) Function**:
+    - Equation: GELU is a smooth approximation of the ReLU function based on the Gaussian cumulative distribution function.
+    - Derivative: The derivative of GELU is not as simple as some other functions and involves the Gaussian probability density function.
+    - Significance: GELU has shown promising performance in certain scenarios, particularly in transformer architectures. Its derivative is crucial for backpropagation, allowing gradients to be computed and weights updated during training.
+
+In summary, the derivatives of activation functions play a vital role in the backpropagation process of neural networks, enabling the computation of gradients and the adjustment of weights to minimize the error between predicted and actual outputs. Each activation function has its characteristics and significance in training neural networks, influencing the learning dynamics and performance of the model.
 
 **3.	Programming Exercise:**
 
