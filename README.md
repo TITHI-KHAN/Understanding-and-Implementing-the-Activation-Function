@@ -86,7 +86,7 @@ This observation results again in a linear function even after applying a hidden
 **Variants of Activation Function**: (**Mathematical Exploration: Derive the Activation function formula and demonstrate its output range.**)
 
 
-Several typesof activation functions have been proposed and utilized in neural network architectures, each with its characteristics, advantages, and disadvantages. Below are some widely studied activation functions:
+Several types of activation functions have been proposed and utilized in neural network architectures, each with its characteristics, advantages, and disadvantages. Below are some widely studied activation functions:
 
 **1. Sigmoid Function (Logistic Function)**:
 
@@ -147,14 +147,123 @@ In simple words, RELU learns much faster than sigmoid and Tanh function.
 
 Leaky ReLU addresses the "dying ReLU" problem by allowing a small gradient for negative inputs. It is defined as ![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/fc386701-40ae-4f93-96d2-ccd38e860974) ,where ![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/41f63c8e-e227-450d-bc4b-34805b12adfb) is a small positive constant.
 
+Using this function, we can convert negative values to make them close to 0 but not actually 0, solving the dying ReLU issue that arises from using the standard ReLU function during neural network training.
+
+**Note**: If we set the value of alpha to 0 this function will act as the standard ReLU function.
+
+![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/ec3b3af4-5e81-4e86-ac86-25b0c134371a)
+
+Let's suppose we use a small constant value for the variable alpha. In that case, all negative values on the x-axis representing the input to the function get mapped close to zero while the positive values remain unchanged.
+
+**Note**: The value of the constant (alpha) is determined before training, i.e. it is not learned during training.
+
 **5. Exponential Linear Unit (ELU)**:
 
 ELU function, ![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/06979617-c781-4a3b-8c2d-37d7e054b142) ,offers improved robustness to the saturation problem observed in ReLU. It ensures smooth gradients for both positive and negative inputs.
+
+**Mathematical Definition of ELU**
+
+The mathematical definition of this algorithm is:
+
+Given an input x, the output f(x) is such that:
+
+f(x) = x, for x> 0
+
+f(x) = 𝜇(exp(x)- 1), for x ≤ 0
+
+f'(x) = 1, for x>0
+
+f'(x) = 𝜇(exp(x)), for x ≤ 0
+
+where 𝜇 > 0
+
+Exponential Linear Units are different from other linear units and activation functions because ELU's can take negetive inputs. Meaning, the ELU algorithm can process negetive inputs(denoted by x), into usefull and significant outputs.
+
+If x keeps reducing past zero, eventually, the output of the ELU will be capped at -1, as the limit of exp(x) as x approaches negetive infinity is 0. The value for 𝜇 is chosen to control what we want this cap to be regardless of how low the input gets. This is called the saturation point. At the saturation point, and below, there is very little difference in the output of this function(approximately 𝜇), and hence there’s little to no variation(differential) in the information delivered from this node to the other node in the forward propagation.
+
+
+In contrast to other linear unit activation functions, ELUs give negative outputs(i.e activations). These allow for the mean of the activations to be closer to 0, which is closer to the natural gradient, so the outputs are more accurate. This reduced difference in the unit gradient and the natural gradient makes learning more efficient as the training of the model will hence converge faster.
+
+**Learning Using the Derivative of ELU**
+
+Convolutional Neural Networks employs the use of back propagation algorithms during learning. Basically, the algorithm is going to go back into the neurons to learn the historical steps taken to reach an outcome.
+
+Forward propagation is the steps taken to reach an outcome from input to output. The error of the algorithm is calculated by the (actual value - the outcome) sqaured / 2. Essentially, what back propagation does is to go back and optimize the weights of each node. It does this by finding the effect on the error when you change the weights by a small value(i.e d(error)/d(weight)).So for the node that uses the ELU activation function, the differential of the ELU is needed and will be used in reference to the differential of the output error.
+
+Now let's focus on the derivative function of ELU.
+
+f'(x) = 1, for x>0
+
+f'(x) = 𝜇(exp(x)), for x ≤ 0
+
+for x ≤ 0,
+
+f(x) = 𝜇(exp(x)-1)
+
+hence,
+
+f'(x) = 𝜇 * (exp(x)-1)' + 𝜇' * (exp(x)-1), Product Rule
+
+f'(x) = 𝜇 * (exp(x)) + 0
+
+f'(x)= 𝜇(exp(x)
+
+futher more,
+
+f'(x)= 𝜇(exp(x) - 𝜇 + 𝜇
+
+f'(x) = 𝜇(exp(x) - 1) + 𝜇
+
+therefore,
+
+f'(x) = f(x) + 𝜇
+
+Since back propagation and forward propagation is done simultaneously, we need a function for the derivative of f(x) to have low computational cost. Since the value of f(x) and 𝜇 is already stored you can get f'(x) by finding the sum of f(x) and 𝜇 at a lower computational cost.
+
+![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/7edcab21-caca-4aab-9916-19036eecf59f)
+
+![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/26f18a24-f4c4-4d1c-a1ea-5c4cd415fc5f)
+
 
 **6. Scaled Exponential Linear Unit (SELU)**:
 
 SELU is designed to maintain the mean and variance of the activations across layers, promoting self-normalization in deep networks. It is defined as
 ![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/c1d3cf0a-ddfd-4cac-8939-bc5dad92a811) , with carefully chosen constants ![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/e1c2f4d0-a7f3-46f4-8a80-b65fbf892e08) and ![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/6f098de2-1a58-48d0-8317-a03f759e5ae3).
+
+Where 
+
+λ and α are the following approximate values:
+
+λ≈ 1.0507009873554804934193349852946
+
+a≈1.6732632423543772848170429916717
+
+If x is larger than 0, the output result is x multiplied by lambda lambda. If the input value x is less than or equal to zero, we have a function that goes up to 0, which is our output y, when x is zero. Essentially, when x is smaller than zero, we take the exponential of the x-value minus 1, then we multiply it with alpha α and lambda λ.
+
+![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/822a01ef-8e08-410c-89ff-47011bc2ab5e)
+
+Unlike ReLU, it can get below 0, allowing the system to have a zero average output. As a result, the model may converge faster.
+
+**SELU is known to be a self-normalizing function, but what is normalization?**
+
+Normalization is a data preparation technique that involves changing the values of numeric columns in a dataset to a common scale. This is usually used when the attributes of the dataset have different ranges.
+
+**There is 3 types of normalization:**
+
+**Input normalization**: One example is scaling the pixel values of grey-scale photographs (0–255) to values between zero and one
+
+**Batch normalization**: Values are changed between each layer of the network so that their mean is zero and their standard deviation is one.
+
+**Internal normalization**: this is where SELU's magic happens. The key idea is that each layer keeps the previous layer's mean and variance.
+
+So, **how does SELU make this possible?** 
+
+More precisely, How can it adjust the mean and variance? Let's take another look at the graph:
+
+![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/a866296f-588d-4dbc-a2f3-5d6b79e3fa08)
+
+For y to change the mean, the activation function needs both positive and negative values. Both options are available here. It is also why ReLU ReLU isn't a good option for a self-normalizing activation function since it can not output negative values.
+
 
 **7. Softmax Function**:
 
@@ -186,7 +295,14 @@ The softmax function is also a type of sigmoid function but is handy when we are
 
 Swish activation, proposed by Ramachandran et al., is defined as ![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/404e07ad-a896-45b1-8e76-08a325b75d72). It has been shown to outperform ReLU in certain scenarios, offering smoother gradients.
 
+![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/f3bdc275-d43a-4b07-ab65-369b202cd90a)
+
+
 **9. Linear Function**:
+
+The linear activation function, also known as "no activation," or "identity function" (multiplied x1.0), is where the activation is proportional to the input.
+
+The function doesn't do anything to the weighted sum of the input, it simply spits out the value it was given. 
 
 Linear function has the equation similar to as of a straight line i.e. y = x
 
@@ -200,6 +316,12 @@ No matter how many layers we have, if all are linear in nature, the final activa
 
 **For example** : Calculation of price of a house is a regression problem. House price may have any big/small value, so we can apply linear activation at output layer. Even in this case neural net must have any non-linear function at hidden layers. 
 
+Mathematically it can be represented as:
+
+![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/7ddeafb4-e951-4158-9a9a-5ded1df99bb1)
+
+
+![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/07f64c54-da70-447c-b060-3d941305c085)
 
 
 o	Discuss why activation functions are used in neural networks, focusing on the role of the Activation function.
