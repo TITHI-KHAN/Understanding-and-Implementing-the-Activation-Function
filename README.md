@@ -102,7 +102,7 @@ Overall, activation functions are essential components of neural networks, enabl
 
 Several types of activation functions have been proposed and utilized in neural network architectures, each with its characteristics, advantages, and disadvantages. Below are some widely studied activation functions:
 
-**1. Sigmoid Function (Logistic Function)
+1. Sigmoid Function (Logistic Function)
 2. Hyperbolic Tangent Function (tanh)
 3. Rectified Linear Unit (ReLU)
 4. Leaky ReLU
