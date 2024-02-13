@@ -487,29 +487,84 @@ In summary, the derivatives of activation functions play a vital role in the bac
 
 **3.	Programming Exercise:**
 
-o Implement the Activation Activation Function in Python. Use the following prototype for your function:
-def Activation_Function_Name(x): # Your implementation
+o **Implement the Activation Activation Function in Python. Use the following prototype for your function:**
 
-o Create a small dataset or use an existing one to apply your function and visualize the results.
+**def Activation_Function_Name(x): # Your implementation**
+
+**Answer**: Please check the 'Activation Functions of Neural Network.py' file.
+
+![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/1014468d-8f0e-432b-9afd-a1812332dab8)
+
+![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/fc95e65c-d941-43aa-be0b-c252c41fe654)
+
+![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/72476894-c78d-4e3b-b387-aa608e3c97db)
+
+![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/c7e7a1f0-fd58-484f-987f-704b3814080c)
+
+o **Create a small dataset or use an existing one to apply your function and visualize the results.**
+
+**Answer**: Please check the 'Activation Functions of Neural Network.py' file.
+
+![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/41040a98-db10-455c-bec1-07f30797d805)
+
  
 **4.	Analysis:**
 
-o	Analyze the advantages and disadvantages of using the Activation Function in neural networks.
+o	**Analyze the advantages and disadvantages of using the Activation Function in neural networks**.
 
-o	Discuss the impact of the Activation function on gradient descent and the problem of vanishing gradients.
+**Answer**: 
 
-**Assessment Criteria:**
+Let's analyze the advantages and disadvantages of using activation functions in neural networks:
 
-•	**Understanding and Explanation**: Clarity and depth of the explanation about the Activation function and its role in neural networks.
+**Advantages:**
 
-•	**Mathematical Accuracy**: Correctness in the derivation and mathematical explanations provided.
+1. **Introducing Non-linearity**: Activation functions introduce non-linearity into neural networks, enabling them to learn and model complex relationships within data. This non-linearity allows neural networks to approximate arbitrary functions, making them powerful function approximators.
 
-•	**Code Quality**: Efficiency, readability, and correctness of the programming exercise.
+2. **Feature Learning**: Activation functions facilitate feature learning by enabling neurons to selectively activate and learn relevant features from the input data. Different activation functions emphasize different aspects of the data, allowing the network to capture various patterns and representations.
 
-•	**Analysis and Critical Thinking**: Depth of the analysis on the advantages, disadvantages, and implications of using the Activation function.
+3. **Gradient Propagation**: Activation functions play a crucial role in gradient propagation during backpropagation, enabling efficient learning by providing meaningful gradients for weight updates. This allows the network to adjust its parameters to minimize the error between predicted and actual outputs.
 
-•	**Creativity and Initiative**: For the optional task, the complexity of the implemented neural network model and the thoroughness in evaluating its performance.
+4. **Addressing Vanishing Gradient**: Certain activation functions, such as ReLU and its variants, help mitigate the vanishing gradient problem by allowing gradients to flow more effectively during backpropagation. This promotes faster convergence and more stable training dynamics, especially in deep neural networks.
 
+5. **Normalization**: Some activation functions, like SELU, incorporate normalization properties, leading to self-normalization of hidden layers. This can improve training stability and convergence, particularly in architectures like recurrent neural networks (RNNs).
 
+**Disadvantages:**
 
+1. **Dying Neurons**: Activation functions like ReLU suffer from the "dying ReLU" problem, where neurons become inactive and stop learning if their inputs fall below zero. This can lead to dead neurons, resulting in a reduction of the model's capacity to learn and generalize.
+
+2. **Gradient Saturation**: Certain activation functions, such as sigmoid and tanh, exhibit saturation behavior, where gradients become very small (close to zero) for large input values. This can slow down learning, especially in deeper networks, due to vanishing gradients.
+
+3. **Non-Zero-Centeredness**: Activation functions like ReLU are not zero-centered, which can lead to issues during optimization, particularly when using gradient-based methods. This may require additional normalization techniques or careful weight initialization strategies to mitigate.
+
+4. **Complexity and Computation**: Some activation functions, especially those with complex formulations like ELU and GELU, can introduce additional computational complexity during both forward and backward passes. This may impact training speed and memory requirements, especially in large-scale neural networks.
+
+5. **Sensitivity to Hyperparameters**: The performance of activation functions can be sensitive to hyperparameters such as learning rate, initialization methods, and network architecture. Choosing the appropriate activation function for a specific task often requires empirical experimentation.
+
+In summary, while activation functions are essential components of neural networks that enable non-linear transformations and efficient learning, they also come with their limitations and challenges. Understanding these advantages and disadvantages is crucial for selecting the appropriate activation functions and designing effective neural network architectures.
+
+o	**Discuss the impact of the Activation function on gradient descent and the problem of vanishing gradients**.
+
+**Answer**: 
+
+The choice of activation function in neural networks has a significant impact on the gradient descent optimization algorithm and directly affects the problem of vanishing gradients. Let's delve deeper into this relationship:
+
+**Impact on Gradient Descent:**
+
+1. **Gradient Calculation:** Activation functions influence how gradients are computed during backpropagation, which is a critical step in the gradient descent optimization algorithm. The derivative of the activation function determines the magnitude of the gradient and affects how weights are updated to minimize the loss function.
+
+2. **Learning Dynamics:** Different activation functions lead to varying learning dynamics in neural networks. Some activation functions, like ReLU, allow for faster convergence due to their simple derivative properties, while others, like sigmoid and tanh, can introduce saturation effects that slow down learning.
+
+3. **Stability and Convergence:** The choice of activation function can impact the stability and convergence speed of the optimization process. Activation functions with non-saturating derivatives, such as ReLU and its variants, often lead to more stable training dynamics and faster convergence compared to functions with saturating derivatives, like sigmoid and tanh.
+
+**Impact on Vanishing Gradients:**
+
+1. **Definition:** The vanishing gradient problem occurs when gradients become extremely small as they propagate backward through many layers of a neural network during training. This phenomenon can hinder the learning process, especially in deep networks, as it leads to negligible updates to the weights in early layers.
+
+2. **Saturated Activation Functions:** Activation functions like sigmoid and tanh are prone to saturation, particularly for large positive or negative inputs. When inputs are in the saturated regions of these functions, their derivatives approach zero, causing gradients to vanish during backpropagation.
+
+3. **Effect on Depth:** The vanishing gradient problem becomes more pronounced in deeper neural networks due to the cumulative effect of gradients diminishing as they propagate backward through multiple layers. This limits the ability of deep networks to effectively learn hierarchical representations of data.
+
+4. **Mitigation with ReLU and Variants:** Activation functions like ReLU and its variants (e.g., Leaky ReLU, ELU) address the vanishing gradient problem by providing non-saturating derivatives for positive inputs. This allows gradients to flow more freely during backpropagation, facilitating more effective weight updates and mitigating the issue of vanishing gradients.
+
+In summary, the choice of activation function profoundly impacts the behavior of gradient descent optimization and directly influences the occurrence of the vanishing gradient problem. Activation functions with non-saturating derivatives, such as ReLU and its variants, are often preferred in practice for deep neural networks due to their ability to mitigate the vanishing gradient problem and facilitate faster convergence.
 
