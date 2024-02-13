@@ -2,7 +2,7 @@
 
 # Understanding-and-Implementing-the-Activation-Function
 
-##Objective:
+## Objective:
 
 **1.**	To comprehend the conceptual and mathematics underpinnings of the Activation Function.
 
