@@ -12,7 +12,7 @@
 
 **Tasks:**
 
-##**Theoretical Understanding: Explain the Activation Function, including its equation and graph.**
+## **Theoretical Understanding: Explain the Activation Function, including its equation and graph.**
 
 Ans: Activation functions play a crucial role in artificial neural networks by introducing non-linearity, which enables the network to learn complex mappings between input and output spaces. An activation function is a crucial component of a neural network, responsible for introducing non-linearity into the model. It operates on the weighted sum of inputs and biases of a neuron, determining whether it should be activated or not. The output of the activation function decides the input for the next layer in the neural network.
 
