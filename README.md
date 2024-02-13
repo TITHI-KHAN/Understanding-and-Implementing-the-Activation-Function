@@ -88,6 +88,20 @@ This observation results again in a linear function even after applying a hidden
 
 Several types of activation functions have been proposed and utilized in neural network architectures, each with its characteristics, advantages, and disadvantages. Below are some widely studied activation functions:
 
+1. Sigmoid Function (Logistic Function)
+2. Hyperbolic Tangent Function (tanh)
+3. Rectified Linear Unit (ReLU)
+4. Leaky ReLU
+5. Exponential Linear Unit (ELU)
+6. Scaled Exponential Linear Unit (SELU)
+7. Softmax Function
+8. Swish Function
+9. Linear Function
+10. Parametric ReLU Function
+11. Gaussian Error Linear Unit (GELU) Function
+
+
+
 **1. Sigmoid Function (Logistic Function)**:
 
 The sigmoid function, defined as ![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/ba2fe442-da1f-4bd8-bd28-98ccd3ae5b7a), maps the input to the range (0, 1). Historically popular, it is mainly used in the output layer of binary classification tasks. However, its tendency to saturate and the vanishing gradient problem limit its effectiveness in deeper networks.
@@ -285,17 +299,17 @@ The softmax function is also a type of sigmoid function but is handy when we are
 
 **Output**:- The softmax function is ideally used in the output layer of the classifier where we are actually trying to attain the probabilities to define the class of each input.
 
-**The basic rule of thumb is if you really don’t know what activation function to use, then simply use RELU as it is a general activation function in hidden layers and is used in most cases these days.**
-
-**If your output is for binary classification then, sigmoid function is very natural choice for output layer.**
-
-**If your output is for multi-class classification then, Softmax is very useful to predict the probabilities of each classes.**
-
 **8. Swish Function**:
 
 Swish activation, proposed by Ramachandran et al., is defined as ![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/404e07ad-a896-45b1-8e76-08a325b75d72). It has been shown to outperform ReLU in certain scenarios, offering smoother gradients.
 
-![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/f3bdc275-d43a-4b07-ab65-369b202cd90a)
+It is a self-gated activation function developed by researchers at Google. 
+
+Swish consistently matches or outperforms ReLU activation function on deep networks applied to various challenging domains such as image classification, machine translation etc. 
+
+![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/9487d8f1-caf3-4e3b-85f7-498ad1e6e8c0)
+
+This function is bounded below but unbounded above i.e. Y approaches to a constant value as X approaches negative infinity but Y approaches to infinity as X approaches infinity.
 
 
 **9. Linear Function**:
@@ -322,6 +336,52 @@ Mathematically it can be represented as:
 
 
 ![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/07f64c54-da70-447c-b060-3d941305c085)
+
+**10. Parametric ReLU Function**:
+
+Parametric ReLU is another variant of ReLU that aims to solve the problem of gradient’s becoming zero for the left half of the axis. 
+
+This function provides the slope of the negative part of the function as an argument a. By performing backpropagation, the most appropriate value of a is learnt.
+
+![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/e97795bf-ba0b-480d-a9ac-4c7a727cf235)
+
+Mathematically it can be represented as:
+
+![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/5006b3a1-1788-4043-ac68-38713e79d73d)
+
+Where "a" is the slope parameter for negative values.
+
+The parameterized ReLU function is used when the leaky ReLU function still fails at solving the problem of dead neurons, and the relevant information is not successfully passed to the next layer. 
+
+This function’s limitation is that it may perform differently for different problems depending upon the value of slope parameter a.
+
+**11. Gaussian Error Linear Unit (GELU) Function**:
+
+The Gaussian Error Linear Unit (GELU) activation function is compatible with BERT, ROBERTa, ALBERT, and other top NLP models. This activation function is motivated by combining properties from dropout, zoneout, and ReLUs. 
+
+ReLU and dropout together yield a neuron’s output. ReLU does it deterministically by multiplying the input by zero or one (depending upon the input value being positive or negative) and dropout stochastically multiplying by zero. 
+
+RNN regularizer called zoneout stochastically multiplies inputs by one. 
+
+We merge this functionality by multiplying the input by either zero or one which is stochastically determined and is dependent upon the input. We multiply the neuron input x by 
+
+m ∼ Bernoulli(Φ(x)), where Φ(x) = P(X ≤x), X ∼ N (0, 1) is the cumulative distribution function of the standard normal distribution. 
+
+This distribution is chosen since neuron inputs tend to follow a normal distribution, especially with Batch Normalization.
+
+![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/2a2c766a-02c8-4eb4-ad3a-6b1f1382f36d)
+
+Mathematically it can be represented as:
+
+![image](https://github.com/TITHI-KHAN/Nazmun_Assignment-1_Understanding-and-Implementing-the-Activation-Function/assets/65033964/dd2282eb-52de-4123-b74f-507766c0ed52)
+
+GELU nonlinearity is better than ReLU and ELU activations and finds performance improvements across all tasks in domains of computer vision, natural language processing, and speech recognition.
+
+**The basic rule of thumb is if you really don’t know what activation function to use, then simply use RELU as it is a general activation function in hidden layers and is used in most cases these days.**
+
+**If your output is for binary classification then, sigmoid function is very natural choice for output layer.**
+
+**If your output is for multi-class classification then, Softmax is very useful to predict the probabilities of each classes.**
 
 
 o	Discuss why activation functions are used in neural networks, focusing on the role of the Activation function.
